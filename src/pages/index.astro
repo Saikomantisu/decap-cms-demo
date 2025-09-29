@@ -1,17 +1,28 @@
 ---
+import { getCollection } from 'astro:content';
 
+const packages = await getCollection('packages');
 ---
 
 <html lang='en'>
 	<head>
-		<meta charset='utf-8' />
-		<link rel='icon' type='image/svg+xml' href='/favicon.svg' />
-		<meta name='viewport' content='width=device-width' />
-		<meta name='generator' content={Astro.generator} />
-		<title>Astro</title>
+		<title>Tourism Packages</title>
 	</head>
 	<body>
-		<h1>Astro</h1>
-		></body
-	>
+		<h1>Available Packages</h1>
+		<ul>
+			{
+				packages.map((pkg) => (
+					<li>
+						<a href={`/packages/${pkg.slug}/`}>
+							<h2>{pkg.data.title}</h2>
+							<p>
+								{pkg.data.duration} — ${pkg.data.price}
+							</p>
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</body>
 </html>

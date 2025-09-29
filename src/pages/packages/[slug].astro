@@ -1,0 +1,88 @@
+---
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+	const packages = await getCollection('packages');
+	return packages.map((pkg) => ({
+		params: { slug: pkg.slug },
+		props: { pkg },
+	}));
+}
+
+const { pkg } = Astro.props;
+---
+
+<html lang='en'>
+	<head>
+		<title>{pkg.data.title} | Tourism Packages</title>
+	</head>
+	<body>
+		<h1>{pkg.data.title}</h1>
+		<p><strong>Duration:</strong> {pkg.data.duration}</p>
+		<p><strong>Price:</strong> ${pkg.data.price}</p>
+		<article>
+			<slot />
+			{/* Renders the markdown body */}
+		</article>
+
+		<h2>Itinerary</h2>
+		<ul>
+			{
+				pkg.data.itinerary?.map((day) => (
+					<li>
+						<strong>{day.day}</strong>: {day.activity}
+					</li>
+				))
+			}
+		</ul>
+
+		<h2>What's Included</h2>
+		<ul>
+			{pkg.data.included?.map((item) => <li>{item}</li>)}
+		</ul>
+
+		<h2>What's Not Included</h2>
+		<ul>
+			{pkg.data.not_included?.map((item) => <li>{item}</li>)}
+		</ul>
+
+		<h2>Gallery</h2>
+		<div style='display: flex; gap: 1rem;'>
+			{
+				pkg.data.gallery?.map((img) => (
+					<img src={img} alt={pkg.data.title} width='200' />
+				))
+			}
+		</div>
+
+		<h2>Book This Package</h2>
+		<form
+			name='package-inquiry'
+			method='POST'
+			data-netlify='true'
+			netlify-honeypot='bot-field'>
+			<input type='hidden' name='form-name' value='package-inquiry' />
+			<input type='hidden' name='package' value={pkg.data.title} />
+			<p hidden>
+				<label>Don’t fill this out: <input name='bot-field' /></label>
+			</p>
+
+			<label>
+				Name: <input type='text' name='name' required />
+			</label>
+			<br />
+
+			<label>
+				Email: <input type='email' name='email' required />
+			</label>
+			<br />
+
+			<label>
+				Message: <textarea name='message' required></textarea>
+			</label>
+			<br />
+
+			<button type='submit'>Send Inquiry</button>
+		</form>
+	</body>
+</html>

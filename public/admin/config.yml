@@ -7,14 +7,82 @@ public_folder: 'src/assets/images' # The src attribute for uploaded media
 site_url: https://stellular-cendol-df69f3.netlify.app/
 
 collections:
-  - name: 'blog' # Used in routes, e.g., /admin/collections/blog
-    label: 'Blog' # Used in the UI
-    folder: 'src/content/blog' # The path to the folder where the documents are stored
-    create: true # Allow users to create new documents in this collection
-    fields: # The fields for each document, usually in frontmatter
+  # Blog Collection
+  - name: 'blog'
+    label: 'Blog'
+    folder: 'src/content/blog'
+    create: true
+    fields:
       - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'blog' }
       - { label: 'Title', name: 'title', widget: 'string' }
       - { label: 'Publish Date', name: 'date', widget: 'datetime' }
       - { label: 'Featured Image', name: 'thumbnail', widget: 'image' }
       - { label: 'Rating (scale of 1-5)', name: 'rating', widget: 'number' }
       - { label: 'Body', name: 'body', widget: 'markdown' }
+
+  # Tourism Packages Collection
+  - name: 'packages'
+    label: 'Tourism Packages'
+    folder: 'src/content/packages'
+    create: true
+    slug: '{{slug}}'
+    fields:
+      - {
+          label: 'Layout',
+          name: 'layout',
+          widget: 'hidden',
+          default: 'package',
+        }
+      - { label: 'Package Title', name: 'title', widget: 'string' }
+      - {
+          label: 'Slug',
+          name: 'slug',
+          widget: 'string',
+          hint: 'URL-friendly name',
+        }
+      - {
+          label: 'Duration',
+          name: 'duration',
+          widget: 'string',
+          hint: 'e.g. 5 Days / 4 Nights',
+        }
+      - {
+          label: 'Price',
+          name: 'price',
+          widget: 'number',
+          hint: 'Example: 299',
+        }
+      - { label: 'Publish Date', name: 'date', widget: 'datetime' }
+
+      - label: 'Itinerary'
+        name: 'itinerary'
+        widget: 'list'
+        allow_add: true
+        fields:
+          - { label: 'Day', name: 'day', widget: 'string', hint: 'e.g. Day 1' }
+          - { label: 'Activity / Plan', name: 'activity', widget: 'text' }
+
+      - label: "What's Included"
+        name: 'included'
+        widget: 'list'
+        allow_add: true
+        field: { label: 'Item', name: 'item', widget: 'string' }
+
+      - label: "What's Not Included"
+        name: 'not_included'
+        widget: 'list'
+        allow_add: true
+        field: { label: 'Item', name: 'item', widget: 'string' }
+
+      - label: 'Image Gallery'
+        name: 'gallery'
+        widget: 'list'
+        allow_add: true
+        field: { label: 'Image', name: 'image', widget: 'image' }
+
+      - {
+          label: 'Body',
+          name: 'body',
+          widget: 'markdown',
+          hint: 'Detailed description',
+        }
