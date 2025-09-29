@@ -4,6 +4,7 @@ backend:
 
 media_folder: 'src/assets/images' # Location where files will be stored in the repo
 public_folder: 'src/assets/images' # The src attribute for uploaded media
+site_url: https://stellular-cendol-df69f3.netlify.app/
 
 collections:
   - name: 'blog' # Used in routes, e.g., /admin/collections/blog
