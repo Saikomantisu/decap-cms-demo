@@ -12,17 +12,26 @@ const packages = await getCollection('packages');
 		<h1>Available Packages</h1>
 		<ul>
 			{
-				packages.map((pkg) => (
-					<li>
-						<a href={`/packages/${pkg.slug}/`}>
-							<h2>{pkg.data.title}</h2>
-							<p>
-								{pkg.data.duration} — ${pkg.data.price}
-							</p>
-						</a>
-					</li>
-				))
+				packages.map(
+					(pkg: {
+						slug: any;
+						data: { title: unknown; duration: unknown; price: unknown };
+					}) => (
+						<li>
+							<a href={`/packages/${pkg.slug}/`}>
+								<h2>{pkg.data.title}</h2>
+								<p>
+									{pkg.data.duration} — ${pkg.data.price}
+								</p>
+							</a>
+						</li>
+					)
+				)
 			}
 		</ul>
+
+		<footer>
+			<p>&copy; 2023 Tourism Packages. All rights reserved.</p>
+		</footer>
 	</body>
 </html>
