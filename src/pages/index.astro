@@ -24,5 +24,12 @@ const packages = await getCollection('packages');
 				))
 			}
 		</ul>
+
+		<form data-netlify='true'>
+			<input type='text' name='name' placeholder='Your Name' required />
+			<input type='email' name='email' placeholder='Your Email' required />
+			<input type='text' name='message' placeholder='Your Message' required />
+			<button type='submit'>Send</button>
+		</form>
 	</body>
 </html>
