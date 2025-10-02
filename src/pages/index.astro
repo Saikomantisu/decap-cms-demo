@@ -25,7 +25,11 @@ const packages = await getCollection('packages');
 			}
 		</ul>
 
-		<form data-netlify='true'>
+		<form
+			name='package-inquiry'
+			method='POST'
+			data-netlify='true'
+			netlify-honeypot='bot-field'>
 			<input type='text' name='name' placeholder='Your Name' required />
 			<input type='email' name='email' placeholder='Your Email' required />
 			<input type='text' name='message' placeholder='Your Message' required />
