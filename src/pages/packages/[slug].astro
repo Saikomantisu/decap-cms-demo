@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
 	const packages = await getCollection('packages');
-	return packages.map((pkg) => ({
+	return packages.map((pkg: { slug: any; }) => ({
 		params: { slug: pkg.slug },
 		props: { pkg },
 	}));
@@ -28,7 +28,7 @@ const { pkg } = Astro.props;
 		<h2>Itinerary</h2>
 		<ul>
 			{
-				pkg.data.itinerary?.map((day) => (
+				pkg.data.itinerary?.map((day: { day: unknown; activity: unknown; }) => (
 					<li>
 						<strong>{day.day}</strong>: {day.activity}
 					</li>
@@ -38,18 +38,18 @@ const { pkg } = Astro.props;
 
 		<h2>What's Included</h2>
 		<ul>
-			{pkg.data.included?.map((item) => <li>{item}</li>)}
+			{pkg.data.included?.map((item: unknown) => <li>{item}</li>)}
 		</ul>
 
 		<h2>What's Not Included</h2>
 		<ul>
-			{pkg.data.not_included?.map((item) => <li>{item}</li>)}
+			{pkg.data.not_included?.map((item: unknown) => <li>{item}</li>)}
 		</ul>
 
 		<h2>Gallery</h2>
 		<div style='display: flex; gap: 1rem;'>
 			{
-				pkg.data.gallery?.map((img) => (
+				pkg.data.gallery?.map((img: string | null | undefined) => (
 					<img src={img} alt={pkg.data.title} width='200' />
 				))
 			}
