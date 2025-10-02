@@ -86,3 +86,19 @@ collections:
           widget: 'markdown',
           hint: 'Detailed description',
         }
+
+  # Testimonials Collection
+  - name: 'testimonials'
+    label: 'Testimonials'
+    folder: 'src/content/testimonials'
+    fields:
+      - {
+          label: 'Layout',
+          name: 'layout',
+          widget: 'hidden',
+          default: 'testimonial',
+        }
+      - { label: 'Testimonial', name: 'testimonial', widget: 'text' }
+      - { label: 'Author', name: 'author', widget: 'string' }
+      - { label: 'Author Image', name: 'author_image', widget: 'image' }
+      - { label: 'Author Role', name: 'role', widget: 'string' }
